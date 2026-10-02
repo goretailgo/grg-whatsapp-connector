@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="param_service_url" model="ir.config_parameter">
+        <field name="key">grg_whatsapp_connector.service_url</field>
+        <field name="value">http://127.0.0.1:3100</field>
+    </record>
+    <record id="param_api_key" model="ir.config_parameter">
+        <field name="key">grg_whatsapp_connector.api_key</field>
+        <field name="value">change-me</field>
+    </record>
+    <record id="param_default_cc" model="ir.config_parameter">
+        <field name="key">grg_whatsapp_connector.default_country_code</field>
+        <field name="value">91</field>
+    </record>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_grg_whatsapp" model="ir.ui.view">
+        <field name="name">res.company.form.grg.whatsapp</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="WhatsApp" name="grg_whatsapp">
+                    <group>
+                        <group>
+                            <field name="grg_wa_state" widget="badge"
+                                   decoration-success="grg_wa_state == 'connected'"
+                                   decoration-warning="grg_wa_state in ('waiting_scan', 'connecting')"
+                                   decoration-danger="grg_wa_state == 'disconnected'"/>
+                            <field name="grg_wa_number"/>
+                            <field name="grg_wa_session"/>
+                        </group>
+                    </group>
+                    <div class="d-flex gap-2 my-3">
+                        <button name="action_grg_wa_connect" type="object" string="Connect / Show QR"
+                                class="btn-primary" invisible="grg_wa_state == 'connected'"/>
+                        <button name="action_grg_wa_refresh" type="object" string="Refresh Status"
+                                class="btn-secondary"/>
+                        <button name="action_grg_wa_logout" type="object" string="Logout"
+                                class="btn-danger" invisible="grg_wa_state != 'connected'"
+                                confirm="Unlink this WhatsApp number from Odoo?"/>
+                    </div>
+                    <div invisible="not grg_wa_qr">
+                        <field name="grg_wa_qr" widget="image" nolabel="1" options="{'size': [280, 280]}"/>
+                        <p class="text-muted mt-2">
+                            Phone: WhatsApp → Settings → Linked devices → Link a device → scan this QR,
+                            then click Refresh Status. QR changes every ~20 seconds: click Refresh Status for a new one.
+                        </p>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

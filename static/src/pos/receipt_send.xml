@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="grg_whatsapp_connector.ReceiptScreen" t-inherit="point_of_sale.ReceiptScreen" t-inherit-mode="extension">
+        <xpath expr="//input[hasclass('send-receipt-phone-input')]/.." position="after">
+            <t t-call="grg_whatsapp_connector.WaRow"/>
+        </xpath>
+    </t>
+    <t t-name="grg_whatsapp_connector.WaRow">
+        <div class="grg-wa-block mt-2">
+            <div class="d-flex">
+                <input type="text" inputmode="numeric" maxlength="10" autocomplete="off"
+                       t-att-class="'o_input flex-grow-1 p-3 border border-end-0 rounded-start-2 text-body' + (grgWa.number and !grgWaValid() ? ' border-danger' : '')"
+                       placeholder="10-digit WhatsApp number"
+                       t-att-value="grgWa.number"
+                       t-on-input="(ev) => this.grgWaOnInput(ev)"
+                       t-att-disabled="grgWa.busy"/>
+                <button class="btn btn-lg text-white rounded-0 rounded-end-2 px-5"
+                        style="background: #25D366; min-width: 25%;"
+                        t-att-disabled="grgWa.busy" t-on-click="() => this.grgWaSend(false)">
+                    <i t-if="!grgWa.busy" class="fa fa-whatsapp fa-lg"/>
+                    <i t-else="" class="fa fa-fw fa-spin fa-circle-o-notch"/>
+                </button>
+            </div>
+            <div t-if="grgWa.status" t-esc="grgWa.status"
+                 t-att-class="'text-center mt-2 ' + (grgWa.ok ? 'text-success' : 'text-danger')"/>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+service/node_modules/
+service/sessions/
+service/.env
+service/*.bak

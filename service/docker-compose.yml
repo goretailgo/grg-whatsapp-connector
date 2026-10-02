@@ -1,0 +1,10 @@
+services:
+  grg-whatsapp:
+    build: .
+    container_name: grg-whatsapp
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:3100:3100"
+    volumes:
+      - ./sessions:/app/sessions
